@@ -1,36 +1,142 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js App Router Playground
+
+A minimal Next.js App Router project to understand modern Next.js concepts without unnecessary complexity.
+
+This project focuses on how Next.js thinks, not on UI or features.
+
+---
+
+## Purpose of This Project
+
+This repository helps you learn:
+• App Router file structure
+• Server Components vs Client Components
+• File-based routing
+• Dynamic routes ([id])
+• Loading and error boundaries
+• Async-first routing behavior (Next.js 15+)
+
+It intentionally avoids:
+• Authentication
+• Databases
+• State management libraries
+• Styling complexity
+
+---
+
+## Tech Stack
+
+• Next.js (App Router)
+• TypeScript
+• React Server Components
+
+---
+
+## Project Structure
+
+```
+app/
+├─ layout.tsx # Root layout (persistent UI)
+├─ page.tsx # Home page (Server Component)
+├─ loading.tsx # Global loading state
+├─ error.tsx # Global error boundary (Client Component)
+└─ products/
+├─ page.tsx # Products list page
+└─ [id]/
+└─ page.tsx # Dynamic product detail page
+components/
+└─ ProductCard.tsx # Example Client Component
+```
+
+---
+
+## Key Concepts Demonstrated
+
+1. App Router
+
+Routing is based on the file system. No route configuration files are used.
+
+2. Server Components (Default)
+
+All pages are Server Components unless explicitly marked with "use client".
+
+3. Client Components
+
+Client Components are used only when interactivity is required.
+
+'use client'
+
+4. Dynamic Routing
+
+The [id] folder maps directly to dynamic routes such as /products/1.
+
+In modern Next.js versions, route params are async and must be awaited.
+
+5. Loading and Error Boundaries
+   • loading.tsx renders automatically during suspense
+   • error.tsx must be a Client Component
+
+---
 
 ## Getting Started
 
-First, run the development server:
+1. Install Dependencies
+
+```bash
+npm install
+```
+
+2. Start Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app will run on:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+(If the port is busy, Next.js will automatically use another port.)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+How to Test the App
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open the following routes in the browser:
+• / → Home page
+• /products → Products list
+• /products/1 → Product detail page
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Verify:
+• Header persists across routes
+• Dynamic route works for any ID
+• No client-side data fetching is used
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Common Gotchas Covered
+• error.tsx must be a Client Component
+• loading.tsx must default-export a React component
+• Route params are async in newer Next.js versions
+• Avoid unnecessary "use client"
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Next Steps
+
+This project is intended to be extended gradually. Suggested additions:
+• Server Actions
+• Form handling
+• Authentication middleware
+• API routes
+• Caching strategies
+
+Add one concept at a time to keep the mental model clear.
+
+---
+
+License
+
+MIT
